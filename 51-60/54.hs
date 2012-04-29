@@ -75,69 +75,51 @@ values (Hand ((v, _), (w, _), (x, _), (y, _), (z, _))) = [v, w, x, y, z]
 suits :: Hand -> [Suit]
 suits (Hand ((_, s), (_, t), (_, u), (_, v), (_, w))) = [s, t, u, v, w]
 
-ambitus :: Hand -> Int
-ambitus h = (fromEnum.maximum.values) h - (fromEnum.minimum.values) h
+ambitus :: Int -> Hand -> Bool
+ambitus n h = (fromEnum.maximum.values) h - (fromEnum.minimum.values) h == n
 
 partValues :: Hand -> [[Int]]
 partValues = sortBy comp.group.sort.map fromEnum.values
+  where comp (a:as) (b:bs) | la == lb  = compare b a
+                           | otherwise = compare lb la
+          where la = length as
+                lb = length bs
 
 score :: Hand -> [Int]
 score = map head.partValues
 
-comp :: [Int] -> [Int] -> Ordering
-comp (a:as) (b:bs) | la == lb  = compare b a
-                   | otherwise = compare lb la
-  where la = length as
-        lb = length bs
+nDif :: Int -> Hand -> Bool
+nDif n h = (== n).length.nub.values $ h
 
-nDif :: Hand -> Int
-nDif = length.nub.values
-
-nMostPresent :: Hand -> Int
-nMostPresent = length.head.partValues
+nMostPresent :: Int -> Hand -> Bool
+nMostPresent n h = (== n).length.head.partValues $ h
 
 difAndMostPresent :: Int -> Int -> (Hand -> Bool)
-difAndMostPresent n m = ((== n).nDif) &&& ((== m).nMostPresent)
-
-isOnePair :: Hand -> Bool
-isOnePair = difAndMostPresent 4 2
-
-isTwoPairs :: Hand -> Bool
-isTwoPairs = difAndMostPresent 3 2
-
-isThreeOfAKind :: Hand -> Bool
-isThreeOfAKind = difAndMostPresent 3 3
+difAndMostPresent n m = nDif n &&& nMostPresent m
 
 isStraight :: Hand -> Bool
-isStraight h | nDif h == 5 && ambitus h == 4  = True
-             | otherwise                      = False
+isStraight = nDif 5 &&& ambitus 4
 
 isFlush :: Hand -> Bool
 isFlush = (== 1).length.nub.suits
 
-isFullHouse :: Hand -> Bool
-isFullHouse = difAndMostPresent 2 3
+isSFlush :: Hand -> Bool
+isSFlush = isStraight &&& isFlush
 
-isFourOfAKind :: Hand -> Bool
-isFourOfAKind = difAndMostPresent 2 4
-
-isStraightFlush :: Hand -> Bool
-isStraightFlush = isStraight &&& isFlush
-
-isRoyalFlush :: Hand -> Bool
-isRoyalFlush = isStraightFlush &&& ((== Ten).minimum.values)
+isRFlush :: Hand -> Bool
+isRFlush = isSFlush &&& ((== Ten).minimum.values)
 
 figure :: Hand -> (Int, [Int])
-figure h | isRoyalFlush h    = (9, s)
-         | isStraightFlush h = (8, s)
-         | isFourOfAKind h   = (7, s)
-         | isFullHouse h     = (6, s)
-         | isFlush h         = (5, (reverse.sort.map fromEnum.values) h)
-         | isStraight h      = (4, s)
-         | isThreeOfAKind h  = (3, s)
-         | isTwoPairs h      = (2, s)
-         | isOnePair h       = (1, s)
-         | otherwise         = (0, s)
+figure h | isRFlush h              = (9, s) -- royal flush
+         | isSFlush h              = (8, s) -- straight flush
+         | difAndMostPresent 2 4 h = (7, s) -- four of a kind
+         | difAndMostPresent 2 3 h = (6, s) -- full house
+         | isFlush h               = (5, (reverse.sort.map fromEnum.values) h)
+         | isStraight h            = (4, s)
+         | nMostPresent 3 h        = (3, s) -- three of a kind
+         | difAndMostPresent 3 2 h = (2, s) -- double pair
+         | nMostPresent 2 h        = (1, s) -- pair
+         | otherwise               = (0, s)
   where s = score h
 
 p1wins :: Round -> Bool
@@ -149,12 +131,10 @@ p1wins (Round (h1, h2)) | f11 == f21 = f12 > f22
 (&&&) :: (a -> Bool) -> (a -> Bool) -> a -> Bool
 x &&& y = \z -> x z && y z
 
-main = do handle <- openFile "54.data" ReadMode
-          rawData <- hGetContents handle
-          let rawRounds = lines rawData
-              rounds = map parsePoker rawRounds
+main = do f <- readFile "54.data"
+          let rounds = map parsePoker.lines $ f
               result = foldl (\x y -> if p1wins y
                                       then x + 1
                                       else x) 0 (rights rounds)
           putStr ("Player1 a gagné " ++ show result ++ " fois.\n")
-          hClose handle
+
