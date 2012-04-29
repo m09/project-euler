@@ -6,5 +6,5 @@ main = do n <- readFile "8.data"
           print.snd $ foldl (\(l, s) c -> let l' = tail l ++ [c]
                                           in  (l', max (product l') s))
                             (0:(take 4 number), 0)
-                            number
+                            (drop 4 number)
 
