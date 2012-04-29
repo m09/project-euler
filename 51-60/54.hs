@@ -149,7 +149,7 @@ p1wins (Round (h1, h2)) | f11 == f21 = f12 > f22
 (&&&) :: (a -> Bool) -> (a -> Bool) -> a -> Bool
 x &&& y = \z -> x z && y z
 
-main = do handle <- openFile "poker.txt" ReadMode
+main = do handle <- openFile "54.data" ReadMode
           rawData <- hGetContents handle
           let rawRounds = lines rawData
               rounds = map parsePoker rawRounds
