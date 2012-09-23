@@ -1,7 +1,8 @@
+{-# OPTIONS_GHC -Wall #-}
+
 import Text.ParserCombinators.Parsec
-import System.IO
-import Control.Applicative ((<$>), (<*>), pure, liftA2)
-import Data.List (genericLength, genericTake, genericDrop, transpose)
+import Control.Applicative ((<$>), liftA2)
+import Data.List (transpose)
 
 parseFile :: String -> Either ParseError [[Int]]
 parseFile = parse parseLines "(unknown)"
@@ -10,7 +11,7 @@ parseLines :: Parser [[Int]]
 parseLines = parseLine `endBy` newline
 
 parseLine :: Parser [Int]
-parseLine = parseNumber `sepBy` (char ' ')
+parseLine = parseNumber `sepBy` char ' '
 
 parseNumber :: Parser Int
 parseNumber = do d1 <- digit
@@ -27,18 +28,28 @@ main = do f <- readFile "11.data"
               total = foldl1 (liftA2 (++)) groups
           print $ maximum.map product <$> total
 
-groupBy :: Integral a => a -> [b] -> [[b]]
-groupBy n l | genericLength l >= n = genericTake n l
-                                     : groupBy n (genericDrop 1 l)
-            | otherwise            = []
+groupBy :: Int -> [b] -> [[b]]
+groupBy n l | length l >= n = take n l
+                            : groupBy n (drop 1 l)
+            | otherwise     = []
 
 groupBy4 :: [b] -> [[b]]
 groupBy4 = groupBy 4
 
-horizontalGroup = concat.map groupBy4
-verticalGroup = concat.map transpose.groupBy4
-diagonalGroup1 = concat.map transpose.map offset1.groupBy4
-diagonalGroup2 = concat.map transpose.map offset2.groupBy4
+horizontalGroup :: [[a]] -> [[a]]
+horizontalGroup = concatMap groupBy4
 
-offset1 = map (take 17).zipWith drop [0 ..]
-offset2 = map (take 17).zipWith drop [3, 2 ..]
+verticalGroup :: [[a]] -> [[a]]
+verticalGroup = concatMap transpose . groupBy4
+
+diagonalGroup1 :: [[a]] -> [[a]]
+diagonalGroup1 = concatMap (transpose . offset1) . groupBy4
+
+diagonalGroup2 :: [[a]] -> [[a]]
+diagonalGroup2 = concatMap (transpose . offset2) . groupBy4
+
+offset1 :: [[a]] -> [[a]]
+offset1 = map (take 17) . zipWith drop [0 ..]
+
+offset2 :: [[a]] -> [[a]]
+offset2 = map (take 17) . zipWith drop [3, 2 ..]

@@ -10,6 +10,6 @@ main = do n <- readFile "8.data"
                      $ n
           print . snd $ foldl (\(l, s) c -> let l' = tail l ++ [c]
                                             in  (l', max (product l') s))
-                              (0 : (take 4 number), 0)
+                              (0 : take 4 number, 0)
                               (drop 4 number)
 

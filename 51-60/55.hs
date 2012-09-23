@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wall #-}
+
 isPalindrome :: (Integral a, Show a) => a -> Bool
 isPalindrome n = let ns = show n in ns == reverse ns
 
@@ -11,4 +13,5 @@ isLychrel = not
           . tail
           . iterate stepper
 
-main = print . length . filter id . map isLychrel $ [1..9999]
+main :: IO ()
+main = print . length . filter id . map isLychrel $ ([1..9999] :: [Integer])
