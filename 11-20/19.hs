@@ -28,3 +28,4 @@ main = print
      . takeWhile (< QMonth (2001, 1))
      . iterate nextMonth
      $ QMonth (1900, 1)
+
