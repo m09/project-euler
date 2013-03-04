@@ -41,9 +41,20 @@ To do that, we exploit the fact that fromEnum of [A-Z] is [65-90] and that [65-9
 > wordScore = sum . map (subtract 64 . fromEnum)
 
 Then we create the list of triangle numbers.
-To do that we note that triangle numbers are numbers that are separated by a larger and larger increment: from 2 - 1 = 1, 4 - 2 = 2, 7 - 4 = 3, 11 - 7 = 4, etc. The differences of consecutive triangle numbers are indeed [1..].
 
-A convenient function exists to model this behaviour, it's `scanl`. It's part of the Data.List package.
+To do that we note that triangle numbers are numbers that are separated by a larger and larger increment: 
+
+- 2 - 1 = 1;
+- 4 - 2 = 2;
+- 7 - 4 = 3;
+- 11 - 7 = 4;
+- etc.
+
+The differences of consecutive triangle numbers are indeed `[1..]`.
+
+A convenient function exists to model this behaviour, it's `scanl`.
+
+It's part of the `Data.List` package.
 
 > triangleNumbers :: [Int]
 > triangleNumbers = scanl1 (+) [1..]
