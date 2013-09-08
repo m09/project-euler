@@ -7,9 +7,9 @@ And we'll need some nice functions down the road:
 > import Data.List ( genericLength
 >                  , nub )
 
-First, we need to define a function to get the number of digits of
-positive integer. This is down nicely with genericLength so that
-Integers are handled easily:
+First, we need to define a function to get the number of digits of a
+positive integer. This is done nicely with genericLength instead of
+length so that Integers are handled easily (and not only Ints):
 
 > integerLength :: Integer -> Integer
 > integerLength n = genericLength $ show n
@@ -17,14 +17,16 @@ Integers are handled easily:
 Now we need to think a bit about our problem. First we can note that
 10 ^ e where e is a positive integer always has e + 1 digits. So we
 can safely say that if 9 ^ e has less than e digits, e is an upper
-born of the numbers that could work to generate our list. If we
-compute our list from 1 up to infinity, we can stop at the first
-number that is an upper born.
+born of the exponents that could work to generate our list. If we
+compute our list from exponents starting from 1 up to infinity, we can
+stop at the first exponent that is an upper born.
 
-Let's define a function that retrieves the list of numbers that
-interest us for a given exponant and that also returns a boolean that
+Let's now define a function that retrieves the list of numbers that
+interest us for a given exponent and that also returns a boolean that
 indicates if we have to go on or not (True means that we still did not
-hit an upper born):
+hit an upper born), we can do that efficiently since we don't need to
+test more than 9 powers per exponent and since we have properly
+defined our upper born:
 
 > stepN :: Integer -> ([Integer], Bool)
 > stepN e = go 1 []
