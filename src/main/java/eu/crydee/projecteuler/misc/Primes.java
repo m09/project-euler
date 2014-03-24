@@ -10,6 +10,16 @@ public class Primes {
     private static final Logger logger
             = Logger.getLogger(Primes.class.getCanonicalName());
 
+    public static List<Integer> getNPrimes(int n) {
+        int limit = 10;
+        List<Integer> primes;
+        do {
+            limit *= 2;
+            primes = getPrimesUpTo(limit);
+        } while (primes.size() < n);
+        return primes.subList(0, n);
+    }
+
     public static List<Integer> getPrimesUpTo(int to) {
         List<Integer> result = new ArrayList<>();
         BitSet bits = new BitSet();
