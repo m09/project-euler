@@ -20,7 +20,7 @@ public class P11 implements Problem {
     @Override
     public String getSolution() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                Utils.getData(11)))) {
+                Utils.getData(P11.class)))) {
             List<List<Integer>> input = new ArrayList<>();
             String line;
             while ((line = br.readLine()) != null) {

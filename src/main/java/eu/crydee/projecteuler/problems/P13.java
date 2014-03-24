@@ -18,7 +18,7 @@ public class P13 implements Problem {
     @Override
     public String getSolution() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                Utils.getData(13)))) {
+                Utils.getData(P13.class)))) {
             List<BigInteger> input = new ArrayList<>();
             String line;
             while ((line = br.readLine()) != null) {

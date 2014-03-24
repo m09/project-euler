@@ -16,7 +16,7 @@ public class P8 implements Problem {
     @Override
     public String getSolution() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
-                Utils.getData(8)))) {
+                Utils.getData(P8.class)))) {
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
