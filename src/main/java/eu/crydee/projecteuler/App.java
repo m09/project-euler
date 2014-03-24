@@ -86,8 +86,10 @@ public class App {
             for (String problemName : toRun) {
                 Problem problem = problems.get(problemName)
                         .newInstance();
-                logger.info("Running problem " + problemName);
-                logger.info("Solution is: " + problem.getSolution());
+                logger.info("Solution to problem "
+                        + problemName
+                        + " is: "
+                        + problem.getSolution());
             }
         } catch (ParseException ex) {
             System.err.println("The CLI args could not be parsed.");
