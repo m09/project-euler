@@ -6,7 +6,6 @@ As usual, we want some help from the compiler and we need
 some libraries.
 
 > {-# OPTIONS_GHC -Wall #-}
-> {-# LANGUAGE BangPatterns #-}
 >
 > import Data.Either
 > import Data.StableMemo
@@ -14,7 +13,7 @@ some libraries.
 
 We'll now need a tree data structure to represent correctly our data:
 
-> data Tree a = Leaf a | Node a (Tree a) (Tree a) deriving (Show, Eq)
+> data Tree a = Leaf a | Node a (Tree a) (Tree a)
 
 And the tools to parse the "triangle" of numbers into this tree.
 First we have to get the data into lists from the file. This is done
