@@ -2,25 +2,11 @@ As usual, we want some help from the compiler and we need
 some libraries.
 
 > {-# OPTIONS_GHC -Wall #-}
+> {-# LANGUAGE BangPatterns #-}
 >
 > import Data.Either
 > import Data.StableMemo
 > import Text.ParserCombinators.Parsec
-
-Down the road, to outline the current problem, we'll need
-to compare two pointers.
-
-> import Foreign
-> import System.IO.Unsafe
-> 
-> x === y = System.IO.Unsafe.unsafePerformIO $
->   do
->     px <- newStablePtr x
->     py <- newStablePtr y
->     let ret = px == py
->     freeStablePtr px
->     freeStablePtr py
->     return ret
 
 We'll now need a tree data structure to represent correctly our data:
 
