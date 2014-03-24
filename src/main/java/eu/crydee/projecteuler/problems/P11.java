@@ -83,9 +83,8 @@ public class P11 implements Problem {
             }
             return String.valueOf(max);
         } catch (IOException ex) {
-
+            return "ioexception: " + ex.getLocalizedMessage();
         }
-        return "couldn't load the data.";
     }
 
     private int getProduct(Collection<Integer> window) {

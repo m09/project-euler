@@ -38,9 +38,8 @@ public class P8 implements Problem {
             }
             return String.valueOf(max);
         } catch (IOException ex) {
-
+            return "ioexception: " + ex.getLocalizedMessage();
         }
-        return "couldn't load the data.";
     }
 
 }
