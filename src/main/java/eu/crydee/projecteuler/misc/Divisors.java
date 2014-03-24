@@ -32,4 +32,18 @@ public class Divisors {
         }
         return result;
     }
+    
+    static public Integer numberOfDivisors(long n) {
+        long limit = Math.round(Math.sqrt(n));
+        int total = 0;
+        for (long i = 1; i < limit; i++) {
+            if (n % i == 0) {
+                total += 2;
+            }
+        }
+        if (limit * limit == n) {
+            total += 1;
+        }
+        return total;
+    }
 }
