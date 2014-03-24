@@ -1,3 +1,7 @@
+WARNING: strictness analysis is required for this program to behave
+correctly. Please use ghc --make 67.lhs -O or equivalent to produce an
+executable.
+
 As usual, we want some help from the compiler and we need
 some libraries.
 
