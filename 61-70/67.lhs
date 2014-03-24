@@ -66,6 +66,4 @@ and the program is exponential.
 > main = do f <- readFile "67.data"
 >           let levels = rights . map parser . lines $ f
 >               tree = lists2tree levels
->               Node _ (Node _ _ b) (Node _ a _) = tree
->           print $ a === b
 >           print $ calculate tree
