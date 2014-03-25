@@ -4,7 +4,7 @@ import java.util.Arrays;
 import org.apache.log4j.Logger;
 
 /**
- * Pen & pencil solution.
+ * Pen & paper solution.
  *
  * To handle this one we first consider all the primes: they must be factors in
  * the solution. Then we find the minimal set of prime factors to handle the
