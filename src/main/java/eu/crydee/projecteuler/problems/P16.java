@@ -13,8 +13,7 @@ public class P16 implements Problem {
     @Override
     public String getSolution() {
         char[] chars = BigInteger.valueOf(2).pow(1000).toString().toCharArray();
-        Character[] characters = ArrayUtils.toObject(chars);
-        return String.valueOf(Arrays.stream(characters)
+        return String.valueOf(Arrays.stream(ArrayUtils.toObject(chars))
                 .mapToInt(a -> Integer.parseInt(a.toString()))
                 .sum());
     }
