@@ -71,7 +71,7 @@ public class Divisors {
         if (n < 0) {
             n = -n;
         }
-        long limit = Math.round(Math.sqrt(n)),
+        long limit = (long) Math.ceil(Math.sqrt(n)),
                 total = 1;
         for (long i = 2; i < limit; i++) {
             if (n % i == 0) {
