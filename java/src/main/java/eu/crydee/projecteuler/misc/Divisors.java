@@ -35,7 +35,7 @@ public class Divisors {
         return result;
     }
 
-    static public Integer numberOfDivisors(long n) {
+    static public Integer numberOfProperDivisors(long n) {
         long limit = Math.round(Math.sqrt(n));
         int total = 0;
         for (long i = 1; i < limit; i++) {

@@ -13,7 +13,7 @@ public class P12 implements Problem {
     @SuppressWarnings("empty-statement")
     public String getSolution() {
         long t = 1l;
-        for (long i = 2l; Divisors.numberOfDivisors(t) <= 500; t += i, i++);
+        for (long i = 2l; Divisors.numberOfProperDivisors(t) <= 500; t += i, i++);
         return String.valueOf(t);
     }
 }
