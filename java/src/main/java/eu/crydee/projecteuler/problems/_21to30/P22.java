@@ -1,6 +1,7 @@
-package eu.crydee.projecteuler.problems;
+package eu.crydee.projecteuler.problems._21to30;
 
 import eu.crydee.projecteuler.misc.Utils;
+import eu.crydee.projecteuler.problems.Problem;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

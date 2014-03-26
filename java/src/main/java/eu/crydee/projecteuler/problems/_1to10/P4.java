@@ -1,6 +1,7 @@
-package eu.crydee.projecteuler.problems;
+package eu.crydee.projecteuler.problems._1to10;
 
 import eu.crydee.projecteuler.misc.Utils;
+import eu.crydee.projecteuler.problems.Problem;
 import java.util.Arrays;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.log4j.Logger;

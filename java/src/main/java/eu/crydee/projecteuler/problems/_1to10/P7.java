@@ -1,6 +1,7 @@
-package eu.crydee.projecteuler.problems;
+package eu.crydee.projecteuler.problems._1to10;
 
 import eu.crydee.projecteuler.misc.Primes;
+import eu.crydee.projecteuler.problems.Problem;
 import org.apache.log4j.Logger;
 
 public class P7 implements Problem {

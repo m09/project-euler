@@ -15,8 +15,8 @@ public class Utils {
 
     static public <T extends Problem> InputStream getData(Class<T> c) {
         return Utils.class.getResourceAsStream(
-                "/eu/crydee/projecteuler/problems/"
-                + c.getSimpleName()
+                "/"
+                + c.getCanonicalName().replace('.', '/')
                 + ".data");
     }
 }

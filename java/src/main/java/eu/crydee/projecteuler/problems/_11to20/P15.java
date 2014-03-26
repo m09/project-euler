@@ -1,6 +1,7 @@
-package eu.crydee.projecteuler.problems;
+package eu.crydee.projecteuler.problems._11to20;
 
 import com.google.common.math.BigIntegerMath;
+import eu.crydee.projecteuler.problems.Problem;
 import org.apache.log4j.Logger;
 
 /**

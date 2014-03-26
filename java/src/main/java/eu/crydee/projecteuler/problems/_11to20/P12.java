@@ -1,6 +1,7 @@
-package eu.crydee.projecteuler.problems;
+package eu.crydee.projecteuler.problems._11to20;
 
 import eu.crydee.projecteuler.misc.Divisors;
+import eu.crydee.projecteuler.problems.Problem;
 import org.apache.log4j.Logger;
 
 public class P12 implements Problem {

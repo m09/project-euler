@@ -42,8 +42,7 @@ public class App {
                     @SuppressWarnings("unchecked")
                     Class<? extends Problem> c2 = (Class<? extends Problem>) c;
                     problems.put(
-                            classInfo.getName().replaceFirst(
-                                    "eu.crydee.projecteuler.problems.P", ""),
+                            classInfo.getSimpleName().replaceFirst("P", ""),
                             c2);
                 }
             });
