@@ -13,20 +13,6 @@
         <maven.test.skip>true</maven.test.skip>
     </properties>
     
-    <repositories>
-        <repository>
-            <id>checker-framework-repo</id>
-            <url>http://types.cs.washington.edu/m2-repo</url>
-        </repository>
-    </repositories>
-    
-    <pluginRepositories>
-        <pluginRepository>
-            <id>checker-framework-repo</id>
-            <url>http://types.cs.washington.edu/m2-repo</url>
-        </pluginRepository>
-    </pluginRepositories>
-    
     <dependencies>
         <dependency>
             <groupId>types.checkers</groupId>
@@ -98,25 +84,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>types.checkers</groupId>
-                <artifactId>checkers-maven-plugin</artifactId>
-                <version>1.7.4</version>
-                <executions>
-                    <execution>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <processors>
-                        <processor>checkers.nullness.NullnessChecker</processor>
-                    </processors>
-                    <skip>true</skip>
-                </configuration>
             </plugin>
         </plugins>
     </build>
