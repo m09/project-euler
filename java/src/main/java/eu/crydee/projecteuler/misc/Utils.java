@@ -13,6 +13,10 @@ public class Utils {
         return n.toString().toCharArray();
     }
 
+    static public int numberOfDigits(Number n) {
+        return n.toString().length();
+    }
+
     static public <T extends Problem> InputStream getData(Class<T> c) {
         return Utils.class.getResourceAsStream(
                 "/"
