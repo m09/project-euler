@@ -4,8 +4,6 @@ import eu.crydee.projecteuler.misc.Utils;
 import eu.crydee.projecteuler.problems.Problem;
 import java.util.Deque;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
 
@@ -42,7 +40,9 @@ public class P26 implements Problem {
                 }
             }
             logger.debug("numerator:" + numerator);
-            numerator %= denominator;
+            if ((numerator %= denominator) == 0) {
+                return 0;
+            }
             digitsNumerator.push((int) numerator);
             logger.debug("new numerator: " + numerator);
             logger.debug("step: " + step);
@@ -50,9 +50,6 @@ public class P26 implements Problem {
             logger.debug("numerator: " + numerator);
             logger.debug("step: " + step);
             logger.debug("===");
-            if (numerator == 0) {
-                return 0;
-            }
         }
         return step - seen.get(numerator);
     }
