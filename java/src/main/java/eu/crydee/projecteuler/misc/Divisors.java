@@ -1,5 +1,8 @@
 package eu.crydee.projecteuler.misc;
 
+import com.google.common.math.BigIntegerMath;
+import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,24 +14,20 @@ public class Divisors {
     private static final Logger logger
             = Logger.getLogger(Divisors.class.getCanonicalName());
 
-    static public List<Integer> getPrimeDivisors(long n) {
-        List<Integer> result = new ArrayList<>();
-        if (n < 1) {
+    static public List<BigInteger> getPrimeDivisors(BigInteger n) {
+        List<BigInteger> result = new ArrayList<>();
+        if (n.compareTo(BigInteger.ONE) < 0) {
             return result;
         }
-        result.add(1);
-        long lLimit = (long) Math.ceil(Math.sqrt(n));
-        if (lLimit > Integer.MAX_VALUE) {
-            throw new NumberTooBigException();
-        }
-        int limit = (int) lLimit;
-        long current = n;
-        for (int prime : Primes.getPrimesUpTo(limit)) {
-            if (current == 1) {
+        result.add(BigInteger.ONE);
+        BigInteger limit = BigIntegerMath.sqrt(n, RoundingMode.UP);
+        BigInteger current = n;
+        for (BigInteger prime : Primes.getPrimesUpTo(limit)) {
+            if (current.equals(BigInteger.ONE)) {
                 break;
             }
-            while (current % prime == 0) {
-                current /= prime;
+            while (current.mod(prime).equals(BigInteger.ZERO)) {
+                current = current.divide(prime);
                 result.add(prime);
             }
         }

@@ -3,6 +3,7 @@ package eu.crydee.projecteuler.problems._1to10;
 import com.google.common.collect.Ordering;
 import eu.crydee.projecteuler.misc.Divisors;
 import eu.crydee.projecteuler.problems.Problem;
+import java.math.BigInteger;
 import org.apache.log4j.Logger;
 
 public class P3 implements Problem {
@@ -12,9 +13,10 @@ public class P3 implements Problem {
 
     @Override
     public String getSolution() {
-        return Divisors.getPrimeDivisors(600851475143l).stream()
+        return Divisors.getPrimeDivisors(BigInteger.valueOf(600851475143l))
+                .stream()
                 .max(Ordering.natural())
-                .orElse(-1)
+                .get()
                 .toString();
     }
 

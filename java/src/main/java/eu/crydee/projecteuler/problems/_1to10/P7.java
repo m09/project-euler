@@ -11,7 +11,6 @@ public class P7 implements Problem {
 
     @Override
     public String getSolution() {
-        return Primes.getNPrimes(10001).get(10000).toString();
+        return Primes.stream().skip(10000).findFirst().get().toString();
     }
-
 }
