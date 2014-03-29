@@ -24,7 +24,7 @@ public class P25 implements Problem {
         return String.valueOf(index.get());
     }
 
-    private <T extends Comparable> List<T> getNext(List<T> permutation) {
+    private <T extends Comparable<T>> List<T> getNext(List<T> permutation) {
         if (permutation == null) {
             return null;
         }
@@ -54,7 +54,9 @@ public class P25 implements Problem {
         return null;
     }
 
-    private <T extends Comparable> T selectMinAboveElem(T t, Collection<T> c) {
+    private <T extends Comparable<T>> T selectMinAboveElem(
+            T t,
+            Collection<T> c) {
         T min = null;
         for (T item : c) {
             if (item.compareTo(t) > 0
