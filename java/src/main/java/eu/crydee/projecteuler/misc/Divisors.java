@@ -1,5 +1,6 @@
 package eu.crydee.projecteuler.misc;
 
+import eu.crydee.projecteuler.primes.Primes;
 import com.google.common.math.BigIntegerMath;
 import java.math.BigInteger;
 import java.math.RoundingMode;

@@ -1,4 +1,4 @@
-package eu.crydee.projecteuler.misc;
+package eu.crydee.projecteuler.primes;
 
 import java.math.BigInteger;
 import java.util.HashSet;

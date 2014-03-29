@@ -1,4 +1,4 @@
-package eu.crydee.projecteuler.misc;
+package eu.crydee.projecteuler.primes;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -25,5 +25,21 @@ public class Primes {
             }
             result.add(prime);
         }
+    }
+
+    public static boolean isPrime(long n) {
+        if (n < 0) {
+            n = -n;
+        }
+        if (n == 0 || n == 1 || n % 2 == 0 || n % 3 == 0) {
+            return false;
+        }
+        long limit = (long) Math.ceil(Math.sqrt(n));
+        for (long i = 5; i <= limit; i += 6) {
+            if (n % i == 0 || n % (i + 2) == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
