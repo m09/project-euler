@@ -3,10 +3,10 @@ package eu.crydee.projecteuler.problems._21to30;
 import org.junit.Test;
 import org.junit.Assert;
 
-public class P29Test {
+public class P30Test {
 
     @Test
     public void testGetSolution() {
-        Assert.assertEquals("9183", new P29().getSolution());
+        Assert.assertEquals("443839", new P30().getSolution());
     }
 }
