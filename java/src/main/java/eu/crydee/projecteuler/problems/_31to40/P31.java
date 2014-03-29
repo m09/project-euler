@@ -15,8 +15,8 @@ public class P31 implements Problem {
     }
 
     private int getWays(int[] coins, int c, int amount) {
-        if (c == -1) {
-            return amount == 0 ? 1 : 0;
+        if (c == 0) {
+            return 1;
         }
         int result = 0;
         for (int current = amount; current >= 0; current -= coins[c]) {
