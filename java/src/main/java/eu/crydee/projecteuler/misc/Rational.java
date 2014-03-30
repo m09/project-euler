@@ -27,7 +27,6 @@ final public class Rational implements Comparable<Rational> {
             numerator /= gcd;
             denominator /= gcd;
         }
-        reduced = true;
     }
 
     public Rational add(Rational o) {
