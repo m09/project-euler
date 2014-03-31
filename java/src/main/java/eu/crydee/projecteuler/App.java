@@ -6,6 +6,7 @@ import com.google.common.reflect.ClassPath.ClassInfo;
 import eu.crydee.projecteuler.problems.Problem;
 import eu.crydee.projecteuler.misc.NumericStringComparator;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,19 +72,24 @@ public class App {
             }
             List<String> toRun = new ArrayList<>();
             if (cmd.hasOption('p')) {
-                int number = Integer.parseInt(cmd.getOptionValue('p'));
-                String problemName = String.valueOf(number);
-                if (!problems.containsKey(problemName)) {
-                    throw new ParseException("Can't find the problem class. "
-                            + "Please try again.");
+                try {
+                    int number = Integer.parseInt(cmd.getOptionValue('p'));
+                    String problemName = String.valueOf(number);
+                    if (!problems.containsKey(problemName)) {
+                        throw new ParseException("Can't find the problem "
+                                + "class. Please try again.");
+                    }
+                    toRun.add(problemName);
+                } catch (NumberFormatException ex) {
+                    throw new ParseException("Could not understand -p as a "
+                            + "number.");
                 }
-                toRun.add(problemName);
             } else {
                 toRun.addAll(problems.keySet());
             }
             toRun.sort(new NumericStringComparator());
             for (String problemName : toRun) {
-                Problem problem = problems.get(problemName)
+                Problem problem = problems.get(problemName).getConstructor()
                         .newInstance();
                 logger.info("Solution to problem "
                         + problemName
@@ -95,12 +101,12 @@ public class App {
             System.err.println("The error message was:");
             System.err.println(" " + ex.getMessage());
             System.exit(1);
-        } catch (IllegalAccessException | InstantiationException ex) {
+        } catch (NoSuchMethodException
+                | IllegalAccessException
+                | InstantiationException
+                | IllegalArgumentException
+                | InvocationTargetException ex) {
             System.err.println("Could not create an instance of the problem:");
-            System.err.println(" " + ex.getMessage());
-            System.exit(1);
-        } catch (NumberFormatException ex) {
-            System.err.println("Could not understand -p as a number:");
             System.err.println(" " + ex.getMessage());
             System.exit(1);
         }
