@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.log4j.Logger;
@@ -25,6 +26,14 @@ public class Utils {
                 .map(String::valueOf)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    static public Set<Integer> getDigitsSet(long n) {
+        return Arrays.stream(
+                ArrayUtils.toObject(String.valueOf(n).toCharArray()))
+                .map(String::valueOf)
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet());
     }
 
     static public Deque<Integer> getDigitsStack(long n) {
