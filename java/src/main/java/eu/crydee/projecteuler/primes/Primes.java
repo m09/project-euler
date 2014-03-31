@@ -27,6 +27,21 @@ public class Primes {
         }
     }
 
+    public static Stream<Long> longStream() {
+        return Stream.generate(new LongPrimesSupplier());
+    }
+    
+    public static List<Long> getPrimesUpTo(long to) {
+        ArrayList<Long> result = new ArrayList<>();
+        Iterator<Long> it = longStream().iterator();
+        for (Long prime = it.next();; prime = it.next()) {
+            if (prime > to) {
+                return result;
+            }
+            result.add(prime);
+        }
+    }
+
     public static boolean isPrime(long n) {
         if (n < 0) {
             n = -n;
