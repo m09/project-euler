@@ -32,7 +32,7 @@ public class P43 implements Problem {
     
     private long pick(int digit, int[] digits, int[] divisors) {
         if (digit == -1) {
-            logger.info(ArrayUtils.toString(digits));
+            logger.debug(ArrayUtils.toString(digits));
             return Long.parseLong(Arrays.stream(digits)
                     .boxed()
                     .map(String::valueOf)
