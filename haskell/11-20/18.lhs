@@ -60,10 +60,7 @@ exponential in its naive form, so we need memoization:
 >     where go (Node v l r) = v + (max (calculate l) (calculate r))
 >           go (Leaf v) = v
 
-The current main program to use those functions together has a line
-added to check the equality of two Nodes that should be equal. It
-should print True but prints False. Hence the memoization can't occur
-and the program is exponential.
+The main is a trivial application of those functions.
 
 > main :: IO()
 > main = do f <- readFile "18.data"
