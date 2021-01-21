@@ -1,4 +1,3 @@
 *~
-*.hi
-*.o
-target/
+__pycache__/
+.mypy_cache/
